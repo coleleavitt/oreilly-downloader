@@ -17,7 +17,7 @@ Service](https://learning.oreilly.com/terms/).
 # Usage
 
 ```
-$ pip install aiohttp
+$ pip install aiohttp lxml
 $ python3 oreilly_downloader.py 9781491958698 --jwt 'XYZ'
 …
 created 9781491958698.epub
