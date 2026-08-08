@@ -23,6 +23,14 @@ $ python3 oreilly_downloader.py 9781491958698 --jwt 'XYZ'
 created 9781491958698.epub
 ```
 
+# Contributing
+
+I am not really interested in adding any major features to this project. I will
+accept fixes, but nothing that adds a significant amount of new code.
+
+If you feel like something is missing, feel free to fork. You may also look at
+rejected pull requests, maybe someone already worked on something similar.
+
 # Similar Projects
 
 -   <https://github.com/lorenzodifuccia/safaribooks> (python)
