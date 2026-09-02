@@ -29,7 +29,7 @@ def to_xhtml(s, root_path):
 
     for el in list(tree.iter()):
         for attr in ['href', 'src']:
-            if el.get(attr, '').startswith(root_path):
+            if (el.get(attr) or '').startswith(root_path):
                 el.set(attr, el.get(attr).removeprefix(root_path))
 
     if tree.tag != 'html':
