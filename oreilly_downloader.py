@@ -63,7 +63,7 @@ async def check_auth(session):
         return r.ok
 
 
-async def fetch_book(book_id, zfh, session):
+async def fetch_book(book_id, zfh, session, *, delay=0):
     root_path = f'/api/v2/epubs/urn:orm:book:{book_id}/files/'
 
     async def download(url, path):
@@ -88,12 +88,18 @@ async def fetch_book(book_id, zfh, session):
         ])
 
         url = data.get('next')
+        if url:
+            await asyncio.sleep(delay)
 
 
 async def amain():
     parser = argparse.ArgumentParser()
     parser.add_argument('book_id')
     parser.add_argument('--jwt')
+    parser.add_argument('--delay', type=int, default=0, help=(
+        'Seconds to wait between batches of file downloads. '
+        'Workaround for 403 errors caused by rate-limiting.'
+    ))
     args = parser.parse_args()
 
     filename = f'{args.book_id}.epub'
@@ -110,7 +116,7 @@ async def amain():
             else:
                 print('Authentication failed. Continuing without…')
 
-            await fetch_book(args.book_id, zfh, session)
+            await fetch_book(args.book_id, zfh, session, delay=args.delay)
 
     print(f'created {filename}')
 
