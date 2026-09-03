@@ -69,7 +69,7 @@ async def fetch_book(book_id, zfh, session, *, delay=0):
     async def download(url, path):
         async with session.get(url) as r:
             content = await r.read()
-            if path.endswith('.html'):
+            if path.endswith(('.html', '.xhtml')):
                 content = to_xhtml(content, root_path)
             zfh.writestr(path, content)
 
